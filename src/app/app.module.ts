@@ -16,7 +16,6 @@ const routes:Routes =[
   {path:'usuarios/form', component:FormUsuarioComponent }
 ]
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,4 +33,5 @@ const routes:Routes =[
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

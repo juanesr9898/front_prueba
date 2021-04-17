@@ -2,7 +2,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
     <link rel="stylesheet" href="./form-usuario.component.css">
-
 </head>
 
 <body>
@@ -15,22 +14,22 @@
             <i class="fas fa-lock"></i>
             <input class="input-area" type="password" placeholder="Contraseña">
         </div>
-        <div class="input-section hidden">
+        <div class="input-section" [ngClass]="{'hidden' : banderaSH}">
             <i class="far fa-envelope"></i>
             <input class="input-area" type="text" placeholder="Email">
         </div>
-        <div class="input-section hidden">
-            <i class="far fa-envelope"></i>
+        <div class="input-section" [ngClass]="{'hidden' : banderaSH}">
+            <i class="far fa-user"></i>
             <input class="input-area" type="text" placeholder="Nombre y apellidos">
         </div>
-        <button class="btn" id="login-btn">Login</button>
+        <button (click)=hidden() class="btn" id="login-btn">{{loginText}}</button>
         <div class="question-box">
-            <p class="question">¿No te has registrado aún?</p>
+            <p class="question">{{question}}</p>
             <a><br></a>
-            <a class="reg-btn" id="reg-btn" [routerLink]="['#']">Registro</a>
+            <a (click)=showHidden() class="reg-btn" id="reg-btn" [routerLink]="['#']">{{reg}}</a>
         </div>
     </div>
-    <div class="success-box">
-        <h1>Te has logeado con éxito!</h1>
+    <div class="success-box" [ngClass]="{'hidden' : banderaH}">
+        <h1>{{success}}</h1>
     </div>
 </body>
