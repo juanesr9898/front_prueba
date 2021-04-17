@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { UsuarioComponent } from './Usuario/usuario.component';
 import { FormUsuarioComponent } from './Usuario/form-usuario.component';
 
+//Declaración de rutas y de modules
+
 const routes:Routes =[
   {path:'', redirectTo:'/usuarios', pathMatch:'full' },
   {path:'usuarios', component:UsuarioComponent },

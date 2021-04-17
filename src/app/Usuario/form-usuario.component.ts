@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from './usuario';
 import { UsuarioService } from './usuario.service';
@@ -15,41 +16,52 @@ export class FormUsuarioComponent implements OnInit {
   question : string = "¿No te has registrado aún?";
   reg : string = "Registro";
   banderaSH : boolean = true;
-  banderaH : boolean = true;
-  success : string = "Te has registrado con éxito!";
-  
-  constructor(private servicioUsuario: UsuarioService, private router:Router) { }
+  banderaS : boolean = true;
 
-  ngOnInit(): void {
-  }
+  checkoutForm = this.formBuilder.group({
+    nombre: ['', Validators.required],
+    userID: ['', Validators.required],
+    email: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(8)]]
+  });
 
+  constructor(private servicioUsuario: UsuarioService, private router:Router, 
+    private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {}
+
+  // Función que muestra/oculta atributos dependiendo si quiere logearse o registrarse
   showHidden():void{
-    if( this.loginText === "Login" ) {    
+    if( this.loginText === "Login" ) { 
+      this.checkoutForm.reset();   
       this.loginText = "Registro";
       this.question = "¿Ya estas registrado?";
       this.reg = "Login";
       this.banderaSH = false;
     } 
     else {
+      this.checkoutForm.reset();
       this.loginText = "Login";
       this.question = "¿No te has registrado aún?";
       this.reg = "Registro";
       this.banderaSH = true;
+      this.banderaS = true;
     }
   }
 
   hidden():void{
-    if( this.loginText === "Registro" ) {    
-      this.banderaH = true;
-    } 
-    else {
-      this.success = "Te has registrado con éxito!";
-      this.banderaH = false;
-    }
+    if( this.loginText === "Registro" ) {   
+        this.create(); 
+      } 
   }
 
   create():void{
     console.log(this.usuario);
-  }
+      this.servicioUsuario.create(this.usuario).subscribe(
+        res=>this.router.navigate(['#'])
+      );
+      this.banderaS = false;
+      this.checkoutForm.reset();
+    }
 
 }

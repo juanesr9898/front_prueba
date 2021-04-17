@@ -8,7 +8,7 @@ export class Usuario{
     email? : string;
     password? : string;
     //
-    tipoUsuario? : Number; // Por defecto todos seran estudiantes
+    tipoUsuario? : Number = 1; // Por defecto todos seran estudiantes
     materias? : string;
     grupos? : string;
     curso? : string;
