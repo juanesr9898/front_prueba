@@ -1,42 +1,63 @@
-<div class="container">
-    <div style="text-align: center;">
-        <h1>{{ titulo }}</h1>
-        <br>
+<body>
+    <div class="container">
+        <div style="text-align: center;">
+            <h1 style="color: white;">{{ titulo }}</h1>
+            <br>
+        </div>
+        <div>
+            <button class="btn btn-dark" type="button" [routerLink]="['/usuarios/form']">Crear usuario</button>
+        </div>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th style="height:100%; width:25%" scope="col">Tipo de usuario</th>
+                    <th style="width:100%" scope="col">Nombres y Apellidos</th>
+                    <th scope="col">UserID</th>
+                    <th style="width:40% " scope="col">Email</th>
+                    <th scope="col">Contraseña</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Materias</th>
+                    <th scope="col">Grupos</th>
+                    <th scope="col">Prueba</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td>{{ usuario.id }}</td>
+                    <ng-template [ngIf]="usuario.tipoUsuario == 1">
+                        <td>Estudiante</td>
+                    </ng-template>
+                    <ng-template [ngIf]="usuario.tipoUsuario == 0">
+                        <td>Docente</td>
+                    </ng-template>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.userID }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.password }}</td>
+                    <td>{{ usuario.curso }}</td>
+                    <td>{{ usuario.materias }}</td>
+                    <td>{{ usuario.grupos }}</td>
+                    <ng-template [ngIf]="usuario.tipoUsuario == 0">
+                        <td>
+                            <button type="button" name="button" class="btn btn-info" [routerLink]="['/usuarios/prueba', usuario.id]">Prueba</button>
+                        </td>
+                    </ng-template>
+                    <ng-template [ngIf]="usuario.tipoUsuario == 1">
+                        <td>
+                            <button type="button" name="button" class="btn btn-info" [routerLink]="['#']">Prueba</button>
+                        </td>
+                    </ng-template>
+                    <td>
+                        <button type="button" name="button" class="btn btn-primary" [routerLink]="['/usuarios/form', usuario.id]">Editar</button>
+                    </td>
+                    <td>
+                        <button type="button" name="button" class="btn btn-danger" (click)="delete(usuario.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div>
-        <button class="btn btn-info" type="button" [routerLink]="['/usuarios/form']">Crear usuario</button>
-    </div>
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Tipo de usuario</th>
-                <th scope="col">Nombres y Apellidos</th>
-                <th scope="col">UserID</th>
-                <th scope="col">Email</th>
-                <th scope="col">Contraseña</th>
-                <th scope="col">Curso</th>
-                <th scope="col">Materias</th>
-                <th scope="col">Grupos</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let usuario of usuarios">
-                <td>{{ usuario.id }}</td>
-                <div *ngIf="usuario.tipoUsuario == 1; else elseBlock">
-                    <td>Estudiante</td>
-                </div>
-                <ng-template #elseBlock>
-                    <td>Docente</td>
-                </ng-template>
-                <td>{{ usuario.nombre }}</td>
-                <td>{{ usuario.userID }}</td>
-                <td>{{ usuario.email }}</td>
-                <td>{{ usuario.password }}</td>
-                <td>{{ usuario.curso }}</td>
-                <td>{{ usuario.materias }}</td>
-                <td>{{ usuario.grupos }}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+</body>

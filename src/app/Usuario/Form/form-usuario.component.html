@@ -1,0 +1,102 @@
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="./form-usuario.component.css">
+</head>
+
+<body>
+    <div class="login-box">
+        <form [formGroup]="checkoutForm">
+            <div class="input-section form-group">
+                <img src="../../../assets/img/vectorpaint.svg" />
+                <input class="input-area" type="text" [(ngModel)]="usuario.userID" placeholder="UserID" formControlName='userID'>
+                <div class="text-danger" *ngIf="checkoutForm.get('userID')?.hasError('required') && checkoutForm.get('userID')?.touched">
+                    <span>El UserID <strong>es obligatorio.</strong></span>
+                </div>
+            </div>
+            <div class="input-section form-group">
+                <i class="fas fa-lock"></i>
+                <input class="input-area" type="password" [(ngModel)]="usuario.password" placeholder="Contraseña" formControlName='password'>
+                <div class="text-danger" *ngIf="checkoutForm.get('password')?.hasError('required') && checkoutForm.get('password')?.touched">
+                    <span>La contraseña <strong>es obligatoria. </strong></span>
+                </div>
+            </div>
+            <div class="input-section form-group" [ngClass]="{'hidden' : banderaSH}">
+                <i class="far fa-envelope"></i>
+                <input class="input-area" type="email" [(ngModel)]="usuario.email" placeholder="Email" formControlName='email'>
+                <div class="text-danger" *ngIf="checkoutForm.get('email')?.hasError('required') && checkoutForm.get('email')?.touched">
+                    <span>El email <strong>es obligatorio.</strong></span>
+                </div>
+            </div>
+            <div class="input-section form-group" [ngClass]="{'hidden' : banderaSH}">
+                <i class="far fa-user"></i>
+                <input class="input-area" type="text" [(ngModel)]="usuario.nombre" placeholder="Nombre y apellidos" formControlName='nombre'>
+                <div class="text-danger" *ngIf="checkoutForm.get('nombre')?.hasError('required') && checkoutForm.get('nombre')?.touched">
+                    <span>El nombre y los apellidos <br> <strong>es obligatorio.</strong></span>
+                </div>
+            </div>
+            <div class="input-section form-group" [ngClass]="{'hidden' : banderaSH}">
+                <i class="far fa-user">&nbsp;
+                    <div style="color: #212529; 
+                        display: inline-block;
+                        background: none;
+                        border: none;
+                        outline: none;
+                        color: #ddd;
+                        border-radius: 0;  font-family: inherit; font-size: inherit;line-height: inherit;">
+                        <br>Tipo de usuario</div>
+                </i>
+
+                <select (click)="show()" class="input-section form-group" [(ngModel)]="usuario.tipoUsuario" formControlName='tipoUsuario' style="color:white;
+                    display: inline-block;
+                    background: none;
+                    border: none;
+                    outline: none;
+                    color: #ddd;
+                    border-radius: 0;  font-family: inherit; font-size: inherit;line-height: inherit;
+                    width: 100px;">
+                        <option style="color:black; font-family: inherit; font-size: inherit;line-height: inherit;" 
+                        value="1" >Estudiante</option>
+                        <option style="color:black; font-family: inherit; font-size: inherit;line-height: inherit;" 
+                        value="0">Docente</option>
+                </select>
+            </div>
+            <div>
+                <br>
+            </div>
+            <div *ngIf="usuario.tipoUsuario == 1">
+                <div class="input-section form-group" [ngClass]="{'hidden' : bandera}">
+                    <img src="assets/img/door-open.svg" />
+                    <input class="input-area" type="text" [(ngModel)]="usuario.curso" placeholder="Curso" formControlName='curso'>
+                    <div class="text-danger" *ngIf="checkoutForm.get('curso')?.hasError('required') && checkoutForm.get('curso')?.touched">
+                        <span>El curso <br> <strong>es obligatorio.</strong></span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="usuario.tipoUsuario == 0">
+                <div class="input-section form-group" [ngClass]="{'hidden' : bandera}">
+                    <img src="../../../assets/img/book.svg" />
+                    <input class="input-area" type="text" [(ngModel)]="usuario.materias" placeholder="Materias" formControlName='materias'>
+                    <div class="text-danger" *ngIf="checkoutForm.get('materias')?.hasError('required') && checkoutForm.get('materias')?.touched">
+                        <span>Las materias <br> <strong>son obligatorias.</strong></span>
+                    </div>
+                </div>
+                <div class="input-section form-group" [ngClass]="{'hidden' : bandera}">
+                    <img src="../../../assets/img/door-open.svg" />
+                    <input class="input-area" type="text" [(ngModel)]="usuario.grupos" placeholder="Grupos" formControlName='grupos'>
+                    <div class="text-danger" *ngIf="checkoutForm.get('grupos')?.hasError('required') && checkoutForm.get('grupos')?.touched">
+                        <span>Los grupos <br> <strong>son obligatorios.</strong></span>
+                    </div>
+                </div>
+
+            </div>
+            <button style="margin-bottom: 15px;" (click)=hidden() class="btn" id="login-btn">{{loginText}}</button>
+            <button (click)=limpiar() [ngClass]="{'hidden' : banderaL}" class="btn" id="login-btn">Limpiar</button>
+            <div class="question-box">
+                <p class="question">{{question}}</p>
+                <a><br></a>
+                <a (click)=showHidden() class="reg-btn" id="reg-btn" [routerLink]="['#']">{{reg}}</a>
+            </div>
+        </form>
+    </div>
+</body>

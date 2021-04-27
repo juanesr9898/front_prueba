@@ -27,7 +27,6 @@ export class UsuarioService {
   }
 
   //Actualizar usuario
-  //Revisar por si genera errores por la url o el objeto usuario
   update(id : number, usuario : Usuario) : Observable<Usuario>{
     return this.http.put<Usuario>(this.UsuarioUrl + '/' + id, usuario);
   }
@@ -36,4 +35,5 @@ export class UsuarioService {
   delete(id : number) : Observable<Usuario> {
     return this.http.delete<Usuario>(this.UsuarioUrl + '/' + id);
   }
+  
 }

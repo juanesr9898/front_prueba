@@ -1,0 +1,35 @@
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400" rel="stylesheet">
+    <link rel="stylesheet" href="./form-prueba-edit.component.css">
+</head>
+
+<body>
+    <div class="login-box">
+        <form [formGroup]="checkoutForm">
+            <div class="input-section form-group">
+                <img src="assets/img/card-text.svg" />
+                <input class="input-area" type="text" [(ngModel)]="prueba.descripcion" placeholder="Descripción" formControlName='descripcion'>
+                <div class="text-danger" *ngIf="checkoutForm.get('descripcion')?.hasError('required') && checkoutForm.get('descripcion')?.touched">
+                    <span>La descripción <strong>es obligatoria.</strong></span>
+                </div>
+            </div>
+            <div class="input-section form-group">
+                <img src="assets/img/door-open.svg" />
+                <input class="input-area" type="text" [(ngModel)]="prueba.materia" placeholder="Materia" formControlName='materia'>
+                <div class="text-danger" *ngIf="checkoutForm.get('materia')?.hasError('required') && checkoutForm.get('materia')?.touched">
+                    <span>La materia <strong>es obligatoria.</strong></span>
+                </div>
+            </div>
+            <div class="input-section form-group">
+                <img src="assets/img/link-45deg.svg" />
+                <input class="input-area" type="text" [(ngModel)]="prueba.enlace" placeholder="Enlace" formControlName='enlace'>
+                <div class="text-danger" *ngIf="checkoutForm.get('enlace')?.hasError('required') && checkoutForm.get('enlace')?.touched">
+                    <span>La materia <strong>es obligatoria.</strong></span>
+                </div>
+            </div>
+            <button style="margin-bottom: 15px;" (click)=hidden() class="btn" id="login-btn">Update</button>
+            <button (click)=limpiar() class="btn" id="login-btn">Limpiar</button>
+        </form>
+    </div>
+</body>
