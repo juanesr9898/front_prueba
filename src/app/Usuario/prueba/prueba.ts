@@ -6,5 +6,6 @@ export class Prueba{
     descripcion? : string;
     enlace? : string;
     materia? : string;
+    curso? : string;
     docenteID? : number;
 }

@@ -4,8 +4,15 @@
             <h1 style="color: white;">{{ titulo }}</h1>
             <br>
         </div>
-        <div>
-            <button class="btn btn-dark" type="button" [routerLink]="['/usuarios/form']">Crear usuario</button>
+        <div style="float: right;">
+            <button class="btn btn-primary" type="button" [routerLink]="['/usuarios/form/#']">Crear usuario</button>
+        </div>
+        <div style="float: right;">
+            <button class="btn btn-info" type="button" (click)="orden()">Ordenar</button>
+        </div>
+        <div class="form-group">
+            <input type="text" class="input-area" name="Filtro" placeholder="Buscar por UserID.." [formControl]="Filtro">
+            <button class="btn btn-dark" type="button" (click)="busqueda()">Buscar</button>
         </div>
         <table class="table table-dark">
             <thead>
@@ -16,9 +23,9 @@
                     <th scope="col">UserID</th>
                     <th style="width:40% " scope="col">Email</th>
                     <th scope="col">Contraseña</th>
+                    <th scope="col">Creación</th>
                     <th scope="col">Curso</th>
                     <th scope="col">Materias</th>
-                    <th scope="col">Grupos</th>
                     <th scope="col">Prueba</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
@@ -37,17 +44,17 @@
                     <td>{{ usuario.userID }}</td>
                     <td>{{ usuario.email }}</td>
                     <td>{{ usuario.password }}</td>
+                    <td>{{ usuario.fecha_creacion}}</td>
                     <td>{{ usuario.curso }}</td>
                     <td>{{ usuario.materias }}</td>
-                    <td>{{ usuario.grupos }}</td>
                     <ng-template [ngIf]="usuario.tipoUsuario == 0">
                         <td>
-                            <button type="button" name="button" class="btn btn-info" [routerLink]="['/usuarios/prueba', usuario.id]">Prueba</button>
+                            <button type="button" name="button" class="btn btn-info" [routerLink]="['/usuarios/prueba', usuario.id]">Pruebas</button>
                         </td>
                     </ng-template>
                     <ng-template [ngIf]="usuario.tipoUsuario == 1">
                         <td>
-                            <button type="button" name="button" class="btn btn-info" [routerLink]="['#']">Prueba</button>
+                            <button type="button" name="button" class="btn btn-info" [routerLink]="['/usuarios/pruebas', usuario.id]">Pruebas</button>
                         </td>
                     </ng-template>
                     <td>

@@ -13,11 +13,13 @@ import { FormUsuarioComponent } from './Usuario/Form/form-usuario.component';
 import { PruebaComponent } from './Usuario/prueba/prueba.component';
 import { FormPruebaComponent } from './Usuario/prueba/form/form-prueba.component';
 import { FormPruebaEditComponent } from './Usuario/prueba/form-prueba-edit/form-prueba-edit.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { PruebaEstudianteComponent } from './Usuario/prueba/prueba-estudiante/prueba-estudiante.component';
+//import { MaterialModule } from '@angular/material';
+import { DatePickerModule } from 'angular-material-datepicker';
+
 
 //Declaración de rutas y de modules
-
-
-
 const routes:Routes =[
   { path:'', redirectTo:'/usuarios', pathMatch:'full' },
   { path:'usuarios', component:UsuarioComponent },
@@ -27,7 +29,8 @@ const routes:Routes =[
   { path:'usuarios/prueba', component:PruebaComponent },
   { path:'usuarios/prueba/:id/form', component:FormPruebaComponent },
   { path:'usuarios/prueba/form/:id', component:FormPruebaComponent },
-  { path:'usuarios/prueba/form/edit/:id', component:FormPruebaEditComponent }  
+  { path:'usuarios/prueba/form/edit/:id', component:FormPruebaEditComponent },
+  { path:'usuarios/pruebas/:id', component:PruebaEstudianteComponent }  
 ]
 
 @NgModule({
@@ -37,7 +40,9 @@ const routes:Routes =[
     FormUsuarioComponent,
     PruebaComponent,
     FormPruebaComponent,
-    FormPruebaEditComponent
+    FormPruebaEditComponent,
+    FilterPipe,
+    PruebaEstudianteComponent
   ],
   imports: [
     BrowserAnimationsModule, // required animations module
@@ -47,7 +52,8 @@ const routes:Routes =[
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DatePickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Usuario } from './usuario';
 
 @Injectable({
@@ -9,11 +10,12 @@ import { Usuario } from './usuario';
 export class UsuarioService {
 
   private UsuarioUrl : string = '/api/usuarios'; //Conexión con el backend de usuarios
+  private date: any;
   constructor(private http:HttpClient) { }
 
   //Obtener un usuario
   get(id : number) : Observable<Usuario> {
-    return this.http.get<Usuario>(this.UsuarioUrl + '/' + id);
+    return this.http.get<Usuario>(this.UsuarioUrl + '/' + id).pipe(tap(data => console.log(data)));
   }
 
   //Obtener todos los usuarios
@@ -23,7 +25,7 @@ export class UsuarioService {
 
   //Crear usuario
   create(usuario : Usuario) : Observable<Usuario>{
-    return this.http.post<Usuario>(this.UsuarioUrl,usuario);
+    return this.http.post<Usuario>(this.UsuarioUrl,usuario).pipe(tap(data => console.log(data)));
   }
 
   //Actualizar usuario

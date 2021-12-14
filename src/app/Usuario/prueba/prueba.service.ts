@@ -17,7 +17,7 @@ export class PruebaService {
     return this.http.get<Prueba>(this.PruebaUrl + '/' +  id);
   }
 
-  //Obtener todos los Pruebas dependiendo de la ID del usuario
+  //Obtener todos los Pruebas dependiendo de la ID del usuario (Docente)
   getAllByUserID(id : number) : Observable<Prueba[]> {
     return this.http.get<Prueba[]>(this.PruebaUrl + '/' + 'list' + '/' + id);
   }

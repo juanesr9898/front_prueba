@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Prueba } from './prueba';
+import { Usuario } from '../usuario';
+import { UsuarioService } from '../usuario.service';
 import { PruebaService } from './prueba.service';
 
 @Component({
@@ -13,13 +15,15 @@ import { PruebaService } from './prueba.service';
 export class PruebaComponent implements OnInit {
   titulo : string = "Lista de pruebas";
   pruebas : Prueba[] = []; //Lista de pruebas
+  usuarios : Usuario[] = []; //Lista de usuarios
   id? : number;
 
   constructor(private servicioPrueba: PruebaService ,private activatedRoute:ActivatedRoute, 
-    private router:Router, private toastr: ToastrService) { }
+    private router:Router, private toastr: ToastrService, private servicioUsuario : UsuarioService) { }
 
   ngOnInit() : void {
     this.cargar();
+    this.listar_Usuarios();
   }
 
   cargar():void{
@@ -34,6 +38,10 @@ export class PruebaComponent implements OnInit {
       }
     );
   }
+
+  listar_Usuarios():void{
+    this.servicioUsuario.getAll().subscribe(u => this.usuarios = u)
+}
 
   delete(id:any):void{
     this.servicioPrueba.delete(id).subscribe(data =>{

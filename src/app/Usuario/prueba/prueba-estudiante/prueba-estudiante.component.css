@@ -1,0 +1,10 @@
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber';
+@import '~angular-material-datepicker/src/datepicker/calendar.component.scss';
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../../../../assets/img/background2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    font-family: "Lato", "Aril", sans-serif;
+}

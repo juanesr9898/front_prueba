@@ -25,7 +25,7 @@
                 <img src="assets/img/link-45deg.svg" />
                 <input class="input-area" type="text" [(ngModel)]="prueba.enlace" placeholder="Enlace" formControlName='enlace'>
                 <div class="text-danger" *ngIf="checkoutForm.get('enlace')?.hasError('required') && checkoutForm.get('enlace')?.touched">
-                    <span>La materia <strong>es obligatoria.</strong></span>
+                    <span>El enlace <strong>es obligatorio.</strong></span>
                 </div>
             </div>
             <button style="margin-bottom: 15px;" (click)=hidden() class="btn" id="login-btn">{{confirmText}}</button>

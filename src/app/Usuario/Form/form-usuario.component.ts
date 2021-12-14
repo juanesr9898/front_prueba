@@ -16,10 +16,10 @@ export class FormUsuarioComponent implements OnInit {
   usuario : Usuario = new Usuario(); //usario individual
   usuarios : Usuario[] = []; //lista de usuarios
   titulo : string = "Registro Usuarios";
-  loginText : string = "Login";
-  question : string = "¿No te has registrado aún?";
-  reg : string = "Registro";
-  banderaSH : boolean = true;
+  loginText : string = "Registro";
+  question : string = "¿Ya estas registrado?";
+  reg : string = "Login";
+  banderaSH : boolean = false;
   banderaS : boolean = true;
   bandera : boolean = true;
   banderaL : boolean = true;
@@ -46,7 +46,7 @@ export class FormUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.banderae = false;
-    this.hidden();
+    this.hidden(); 
     this.cargar();
     this.servicioUsuario.getAll().subscribe(u => this.usuarios = u );
   }
@@ -59,7 +59,7 @@ export class FormUsuarioComponent implements OnInit {
       if(this.bandera === false){
         this.checkoutForm.reset();
       }
-      this.loginText = "Registro"; 
+      this.loginText = "Registro "; 
       this.question = "¿Ya estas registrado?";
       this.reg = "Login";
       this.banderaSH = false;
@@ -80,12 +80,16 @@ export class FormUsuarioComponent implements OnInit {
   }
 
   hidden():void{
-    if( this.loginText === "Registro" ) {   
-        this.create(); 
-      } 
     if(this.router.url == "/usuarios/form/%23" || this.router.url == "/usuarios/form"){
       this.validate = true; 
     }
+
+    if(this.loginText === "Registro") {  
+      if(this.checkoutForm.get("email")?.touched ){
+        this.create(); 
+        this.router.navigate(["/usuarios/"])
+      }
+    } 
     if( this.loginText === "Update" ) {   
       this.banderaS = false;
       this.update(this.id); 
